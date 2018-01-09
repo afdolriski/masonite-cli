@@ -129,7 +129,7 @@ def migrate():
 
 @group.command(name="migrate:rollback")
 def migrationrollback():
-     subprocess.call(['orator', 'migrate:rollback', '-c',
+    subprocess.call(['orator', 'migrate:rollback', '-c',
                       'config/database.py', '-p', 'databases/migrations', '-f'])
 
 @group.command(name="migrate:reset")
@@ -141,7 +141,7 @@ def migrationreset():
 @group.command(name="migrate:refresh")
 def migrationrefresh():
     ''' Rolls back migrations and remigrates '''
-     subprocess.call(['orator', 'migrate:refresh', '-c',
+    subprocess.call(['orator', 'migrate:refresh', '-c',
                       'config/database.py', '-p', 'databases/migrations', '-f'])
 
 
