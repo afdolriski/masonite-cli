@@ -75,7 +75,7 @@ def install():
 @group.command()
 def serve():
     ''' Runs the application. '''
-    call(["gunicorn", "-w 2", "mine:application"])
+    call(["gunicorn", "-w 2", "wsgi:application"])
 
 @group.command()
 @click.argument('viewname')
