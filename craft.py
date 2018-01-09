@@ -133,12 +133,14 @@ def migrationrollback():
                       'config/database.py', '-p', 'databases/migrations', '-f'])
 
 @group.command(name="migrate:reset")
-def migrationrollback():
-     subprocess.call(['orator', 'migrate:reset', '-c',
+def migrationreset():
+    ''' Rolls back lastest migration operation '''
+    subprocess.call(['orator', 'migrate:reset', '-c',
                       'config/database.py', '-p', 'databases/migrations', '-f'])
 
 @group.command(name="migrate:refresh")
-def migrationrollback():
+def migrationrefresh():
+    ''' Rolls back migrations and remigrates '''
      subprocess.call(['orator', 'migrate:refresh', '-c',
                       'config/database.py', '-p', 'databases/migrations', '-f'])
 
@@ -196,6 +198,8 @@ def auth():
     ''' Scaffolds an authentication system. 
         This command will create multiple authentication controllers, routes, and views.
     '''
+    # click.echo('\n\033[92mScaffolding Application ...\033[0m\n')
+    module_path = os.path.dirname(os.path.realpath(__file__))
     f = open('routes/web.py', 'a')
     # add all the routes
     f.write('\nROUTES = ROUTES + [\n    ')
@@ -208,15 +212,15 @@ def auth():
     f.write(']\n')
 
     # move controllers
-    shutil.copyfile("kernal/auth/controllers/LoginController.py",
+    shutil.copyfile(module_path+"/snippets/auth/controllers/LoginController.py",
                     "app/http/controllers/LoginController.py")
-    shutil.copyfile("kernal/auth/controllers/RegisterController.py",
+    shutil.copyfile(module_path+"/snippets/auth/controllers/RegisterController.py",
                     "app/http/controllers/RegisterController.py")
-    shutil.copyfile("kernal/auth/controllers/HomeController.py",
+    shutil.copyfile(module_path+"/snippets/auth/controllers/HomeController.py",
                     "app/http/controllers/HomeController.py")
 
     # move templates
-    shutil.copytree("kernal/auth/templates/auth",
+    shutil.copytree(module_path + "/snippets/auth/templates/auth",
                     "resources/templates/auth")
 
 @group.command()
