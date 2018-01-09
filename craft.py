@@ -199,8 +199,9 @@ def auth():
     ''' Scaffolds an authentication system. 
         This command will create multiple authentication controllers, routes, and views.
     '''
-    # click.echo('\n\033[92mScaffolding Application ...\033[0m\n')
+    click.echo('\n\033[92mScaffolding Application ...\033[0m\n')
     module_path = os.path.dirname(os.path.realpath(__file__))
+    
     f = open('routes/web.py', 'a')
     # add all the routes
     f.write('\nROUTES = ROUTES + [\n    ')
@@ -214,15 +215,17 @@ def auth():
 
     # move controllers
     shutil.copyfile(module_path+"/snippets/auth/controllers/LoginController.py",
-                    "app/http/controllers/LoginController.py")
+                    os.getcwd()+"/app/http/controllers/LoginController.py")
     shutil.copyfile(module_path+"/snippets/auth/controllers/RegisterController.py",
-                    "app/http/controllers/RegisterController.py")
+                    os.getcwd()+"/app/http/controllers/RegisterController.py")
     shutil.copyfile(module_path+"/snippets/auth/controllers/HomeController.py",
-                    "app/http/controllers/HomeController.py")
+                    os.getcwd()+"/app/http/controllers/HomeController.py")
 
     # move templates
     shutil.copytree(module_path + "/snippets/auth/templates/auth",
-                    "resources/templates/auth")
+                    os.getcwd()+"/resources/templates/auth")
+    
+    click.echo('\n\033[92mProject Scaffolded. You now have 4 new controllers, 5 new templates and 6 new routes\033[0m\n')
 
 @group.command()
 @click.argument('project')
