@@ -73,9 +73,10 @@ def install():
         shutil.copy('.env-example', '.env')
 
 @group.command()
+@click.option('--port', default='8000')
 def serve():
     ''' Runs the application. '''
-    call(["gunicorn", "-w 2", "wsgi:application"])
+    call(["waitress-serve", "wsgi:application", '--port', port])
 
 @group.command()
 @click.argument('viewname')
